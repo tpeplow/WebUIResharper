@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using JetBrains.ActionManagement;
+using JetBrains.Application.PluginSupport;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -13,6 +14,11 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright © Microsoft 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+
+[assembly: PluginTitle("Milliman MG-ALFA WebUI Team Plugin")]
+[assembly: PluginDescription("Supports the Milliman MG-ALFA WebUI team in their day-to-day practices.")]
+[assembly: PluginVendor("Milliman, Inc.")]
+[assembly: ActionsXml("WebUIResharper.Actions.xml")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

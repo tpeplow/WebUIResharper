@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<actions>
+  <insert group-id="RefactorType" position="last">
+    <action id="AddDependency" text="Add service dependency..."/>
+  </insert>
+</actions>
