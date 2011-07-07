@@ -9,8 +9,8 @@ using JetBrains.UI.RichText;
 
 namespace WebUIResharper
 {
-    [ActionHandler("AddDependency")]
-    public class AddDependencyAction: ExtensibleRefactoringAction<AddDependencyWorkflowProvider>
+    [ActionHandler]
+    public class WebUI_AddDependencyAction: ExtensibleRefactoringAction<AddDependencyWorkflowProvider>
     {
         protected override RichText Caption
         {
@@ -30,7 +30,7 @@ namespace WebUIResharper
     {
         public override bool PreExecute(IProgressIndicator progressIndicator)
         {
-            return false;
+            return true;
         }
 
         public override bool HasUI
@@ -60,7 +60,7 @@ namespace WebUIResharper
 
         public override string HelpKeyword
         {
-            get { return null; }
+            get { return ""; }
         }
 
         public override IConflictSearcher ConflictSearcher
@@ -80,22 +80,22 @@ namespace WebUIResharper
 
         public override bool Execute(IProgressIndicator progressIndicator)
         {
-            return false;
+            return true;
         }
 
         public override bool PostExecute(IProgressIndicator pi)
         {
-            return false;
+            return true;
         }
 
         public override bool Initialize(IDataContext context)
         {
-            return false;
+            return true;
         }
 
         public override bool IsAvailable(IDataContext context)
         {
-            return false;
+            return true;
         }
     }
 }
