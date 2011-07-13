@@ -18,7 +18,6 @@ using JetBrains.Application.PluginSupport;
 [assembly: PluginTitle("Milliman MG-ALFA WebUI Team Plugin")]
 [assembly: PluginDescription("Supports the Milliman MG-ALFA WebUI team in their day-to-day practices.")]
 [assembly: PluginVendor("Milliman, Inc.")]
-[assembly: ActionsXml("WebUIResharper.Actions.xml")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

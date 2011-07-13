@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<actions>
-  <insert group-id="Refactor" position="last">
-    <action id="WebUI.AddDependency" text="Add service dependency..."/>
-  </insert>
-</actions>
