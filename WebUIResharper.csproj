@@ -144,12 +144,14 @@
     </Compile>
     <Compile Include="AddDependency\AddDependencyWorkflow.cs" />
     <Compile Include="AddDependency\AddDependencyWorkflowProvider.cs" />
+    <Compile Include="AddDependency\AddDependencyWorkflowWithStub.cs" />
     <Compile Include="AddRhinoArg\AddRhinoArgToArgumentContextAction.cs" />
     <Compile Include="ChangeCallToRhino\ChangeCallToAssertWasCalledContextAction.cs" />
     <Compile Include="ChangeCallToRhino\ChangeCallToExpectContextAction.cs" />
     <Compile Include="ChangeCallToRhino\ChangeCallToRhinoCallContextAction.cs" />
     <Compile Include="ChangeCallToRhino\ChangeCallToStubContextAction.cs" />
     <Compile Include="ChangeCallToRhino\ChangeCallToAssertWasNotCalledContextAction.cs" />
+    <Compile Include="CreateStubFromUsage\AddRhinoStub.cs" />
     <Compile Include="CreateStubFromUsage\CreateStubFromUsageFix.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

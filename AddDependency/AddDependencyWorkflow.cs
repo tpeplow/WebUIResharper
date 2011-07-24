@@ -20,13 +20,13 @@ using JetBrains.TextControl;
 
 namespace WebUIResharper.AddDependency
 {
-    public class AddDependencyWorkflow: RefactoringWorkflowBase
+    public class AddDependencyWorkflow : RefactoringWorkflowBase
     {
         private AddDependencyPage _page;
         private IDeclaredElementPointer<ITypeElement> _class;
         private IDeclaredElementPointer<IConstructor> _ctor;
         private string _parameterType;
-        
+
         public override bool PreExecute(IProgressIndicator progressIndicator)
         {
             return true;
@@ -159,7 +159,7 @@ namespace WebUIResharper.AddDependency
             return true;
         }
 
-        private static void ChangeReference(IArgumentsOwner reference, string recommendedName, IType type)
+        private void ChangeReference(IArgumentsOwner reference, string recommendedName, IType type)
         {
             var csharpOwner = reference as ICSharpArgumentsOwner;
             if (csharpOwner == null)
@@ -169,9 +169,16 @@ namespace WebUIResharper.AddDependency
             if (csharpOwner.GetContainingNode<IFieldDeclaration>() != null)
                 inField = true;
             var expression = factory.CreateExpression(inField ? "TODO" : recommendedName);
+            var cSharpArgument = factory.CreateArgument(ParameterKind.VALUE, null, expression);
             csharpOwner.AddArgumentAfter(
-                factory.CreateArgument(ParameterKind.VALUE, null, expression),
+                cSharpArgument,
                 csharpOwner.Arguments.LastOrDefault());
+
+            if (!inField) AddStub(cSharpArgument, reference, recommendedName);
+        }
+
+        protected virtual void AddStub(ICSharpArgument cSharpArgument, IArgumentsOwner reference, string recommendedName)
+        {
         }
 
         private static IEnumerable<IArgumentsOwner> FindReferences(ICSharpParametersOwnerDeclaration parametersOwner, IProgressIndicator progressIndicator)
