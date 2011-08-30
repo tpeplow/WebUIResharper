@@ -39,7 +39,7 @@ namespace WebUIResharper.AddDependency
 
         public override string Title
         {
-            get { return "Add Service Dependency..."; }
+            get { return "Add Service Dependency"; }
         }
 
         public override Image Icon
