@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using JetBrains.Application.DataContext;
 using JetBrains.Application.Progress;
+using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
@@ -26,6 +27,7 @@ namespace WebUIResharper.AddDependency
         private IDeclaredElementPointer<ITypeElement> _class;
         private IDeclaredElementPointer<IConstructor> _ctor;
         private string _parameterType;
+        private ISolution _solution;
 
         public override bool PreExecute(IProgressIndicator progressIndicator)
         {
@@ -61,6 +63,8 @@ namespace WebUIResharper.AddDependency
         {
             get { return ""; }
         }
+
+        public override ISolution Solution { get { return _solution; } }
 
         public override IConflictSearcher ConflictSearcher
         {
@@ -124,7 +128,8 @@ namespace WebUIResharper.AddDependency
                         NamedElementKinds.Parameters,
                         ScopeKind.Common,
                         CSharpLanguage.Instance,
-                        new SuggestionOptions());
+                        new SuggestionOptions(),
+                        ctorDecl.GetSourceFile());
                 }
                 var interfaceDecl = factory.CreateTypeMemberDeclaration("public interface IFoo {}");
                 interfaceDecl.SetName(presentableName);
@@ -141,8 +146,11 @@ namespace WebUIResharper.AddDependency
                 var suggestionOptions = new SuggestionOptions();
                 recommendedName = type.GetPsiServices().Naming.Suggestion.GetDerivedName(
                     type.GetPresentableName(CSharpLanguage.Instance),
-                    NamedElementKinds.Parameters, ScopeKind.Common,
-                    CSharpLanguage.Instance, suggestionOptions);
+                    NamedElementKinds.Parameters, 
+                    ScopeKind.Common,
+                    CSharpLanguage.Instance, 
+                    suggestionOptions,
+                    ctorDecl.GetSourceFile());
             }
             var parametersOwner = ctorDecl as ICSharpParametersOwnerDeclaration;
             var references = FindReferences(parametersOwner, progressIndicator);
@@ -217,6 +225,7 @@ namespace WebUIResharper.AddDependency
 
         public override bool Initialize(IDataContext context)
         {
+            _solution = context.GetData(JetBrains.ProjectModel.DataContext.DataConstants.SOLUTION);
             _page = new AddDependencyPage(
                 s => _parameterType = s,
                 context.GetData(JetBrains.ProjectModel.DataContext.DataConstants.SOLUTION));
